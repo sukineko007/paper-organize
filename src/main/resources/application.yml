@@ -1,0 +1,40 @@
+server:
+  port: 8089
+
+spring:
+    datasource:
+        name: test_paper_system
+        url: jdbc:mysql://127.0.0.1:3306/itembank_manage_system?useUnicode=true&characterEncoding=utf-8&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        username: root
+        password:
+        # 使用druid数据源
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        maxActive: 20
+        initialSize: 1
+        maxWait: 60000
+        minIdle: 1
+        timeBetweenEvictionRunsMillis: 60000
+        minEvictableIdleTimeMillis: 300000
+        validationQuery: select 'x'
+        poolPreparedStatements: true
+        maxOpenPreparedStatements: 20
+
+#    jackson:
+#      date-format: yyyy-MM-dd HH:mm:ss
+#      time-zone: GMT+8
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis:
+  type-aliases-package: edu.nwafu.paper.beans
+  mapper-locations: classpath:xml/*.xml
+logging:
+  level:
+    edu.nwafu.paper:
+      mapper: debug
+      path: E:/paper/log2j

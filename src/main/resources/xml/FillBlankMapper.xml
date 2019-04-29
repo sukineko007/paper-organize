@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.paper.mapper.FillBlankMapper">
+  <resultMap id="BaseResultMap" type="edu.nwafu.paper.beans.FillBlank">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="question" jdbcType="VARCHAR" property="question" />
+    <result column="answer" jdbcType="VARCHAR" property="answer" />
+    <result column="blank_count" jdbcType="INTEGER" property="blankCount" />
+    <result column="difficult" jdbcType="VARCHAR" property="difficult" />
+    <result column="faq" jdbcType="VARCHAR" property="faq" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="course_id" jdbcType="INTEGER" property="courseId" />
+    <result column="point_id" jdbcType="INTEGER" property="pointId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="usage_count" jdbcType="INTEGER" property="usageCount" />
+    <result column="stat" jdbcType="INTEGER" property="stat" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, question, answer, blank_count, difficult, faq, score, course_id, point_id, user_id, 
+    usage_count, stat, create_time
+  </sql>
+  <select id="selectByExample" parameterType="edu.nwafu.paper.beans.FillBlankExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from fill_blank
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from fill_blank
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from fill_blank
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="edu.nwafu.paper.beans.FillBlankExample">
+    delete from fill_blank
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.nwafu.paper.beans.FillBlank">
+    insert into fill_blank (id, question, answer, 
+      blank_count, difficult, faq, 
+      score, course_id, point_id, 
+      user_id, usage_count, stat, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR}, 
+      #{blankCount,jdbcType=INTEGER}, #{difficult,jdbcType=VARCHAR}, #{faq,jdbcType=VARCHAR}, 
+      #{score,jdbcType=INTEGER}, #{courseId,jdbcType=INTEGER}, #{pointId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{usageCount,jdbcType=INTEGER}, #{stat,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="edu.nwafu.paper.beans.FillBlank">
+    insert into fill_blank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="question != null">
+        question,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="blankCount != null">
+        blank_count,
+      </if>
+      <if test="difficult != null">
+        difficult,
+      </if>
+      <if test="faq != null">
+        faq,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="courseId != null">
+        course_id,
+      </if>
+      <if test="pointId != null">
+        point_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="usageCount != null">
+        usage_count,
+      </if>
+      <if test="stat != null">
+        stat,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="blankCount != null">
+        #{blankCount,jdbcType=INTEGER},
+      </if>
+      <if test="difficult != null">
+        #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="faq != null">
+        #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="usageCount != null">
+        #{usageCount,jdbcType=INTEGER},
+      </if>
+      <if test="stat != null">
+        #{stat,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.nwafu.paper.beans.FillBlankExample" resultType="java.lang.Integer">
+    select count(*) from fill_blank
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update fill_blank
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.question != null">
+        question = #{record.question,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answer != null">
+        answer = #{record.answer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.blankCount != null">
+        blank_count = #{record.blankCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.difficult != null">
+        difficult = #{record.difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faq != null">
+        faq = #{record.faq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.score != null">
+        score = #{record.score,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseId != null">
+        course_id = #{record.courseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pointId != null">
+        point_id = #{record.pointId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.usageCount != null">
+        usage_count = #{record.usageCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.stat != null">
+        stat = #{record.stat,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update fill_blank
+    set id = #{record.id,jdbcType=INTEGER},
+      question = #{record.question,jdbcType=VARCHAR},
+      answer = #{record.answer,jdbcType=VARCHAR},
+      blank_count = #{record.blankCount,jdbcType=INTEGER},
+      difficult = #{record.difficult,jdbcType=VARCHAR},
+      faq = #{record.faq,jdbcType=VARCHAR},
+      score = #{record.score,jdbcType=INTEGER},
+      course_id = #{record.courseId,jdbcType=INTEGER},
+      point_id = #{record.pointId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      usage_count = #{record.usageCount,jdbcType=INTEGER},
+      stat = #{record.stat,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="edu.nwafu.paper.beans.FillBlank">
+    update fill_blank
+    <set>
+      <if test="question != null">
+        question = #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        answer = #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="blankCount != null">
+        blank_count = #{blankCount,jdbcType=INTEGER},
+      </if>
+      <if test="difficult != null">
+        difficult = #{difficult,jdbcType=VARCHAR},
+      </if>
+      <if test="faq != null">
+        faq = #{faq,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="courseId != null">
+        course_id = #{courseId,jdbcType=INTEGER},
+      </if>
+      <if test="pointId != null">
+        point_id = #{pointId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="usageCount != null">
+        usage_count = #{usageCount,jdbcType=INTEGER},
+      </if>
+      <if test="stat != null">
+        stat = #{stat,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="edu.nwafu.paper.beans.FillBlank">
+    update fill_blank
+    set question = #{question,jdbcType=VARCHAR},
+      answer = #{answer,jdbcType=VARCHAR},
+      blank_count = #{blankCount,jdbcType=INTEGER},
+      difficult = #{difficult,jdbcType=VARCHAR},
+      faq = #{faq,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      course_id = #{courseId,jdbcType=INTEGER},
+      point_id = #{pointId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      usage_count = #{usageCount,jdbcType=INTEGER},
+      stat = #{stat,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.paper.mapper.ScoreMapper">
+  <resultMap id="BaseResultMap" type="edu.nwafu.paper.beans.Score">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="stuid" jdbcType="INTEGER" property="stuid" />
+    <result column="classname" jdbcType="VARCHAR" property="classname" />
+    <result column="teacher" jdbcType="VARCHAR" property="teacher" />
+    <result column="pname" jdbcType="VARCHAR" property="pname" />
+    <result column="ptype" jdbcType="VARCHAR" property="ptype" />
+    <result column="test_number" jdbcType="INTEGER" property="testNumber" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+    <result column="question_score" jdbcType="REAL" property="questionScore" />
+    <result column="had_score" jdbcType="REAL" property="hadScore" />
+    <result column="test_times" jdbcType="INTEGER" property="testTimes" />
+    <result column="test_time" jdbcType="INTEGER" property="testTime" />
+    <result column="knowledge_pointid" jdbcType="INTEGER" property="knowledgePointid" />
+    <result column="knowledge_pointname" jdbcType="VARCHAR" property="knowledgePointname" />
+    <result column="rate" jdbcType="DATE" property="rate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, stuid, classname, teacher, pname, ptype, test_number, question_id, question_score, 
+    had_score, test_times, test_time, knowledge_pointid, knowledge_pointname, rate
+  </sql>
+  <select id="selectByExample" parameterType="edu.nwafu.paper.beans.ScoreExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.nwafu.paper.beans.ScoreExample">
+    delete from score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.nwafu.paper.beans.Score">
+    insert into score (id, stuid, classname, 
+      teacher, pname, ptype, 
+      test_number, question_id, question_score, 
+      had_score, test_times, test_time, 
+      knowledge_pointid, knowledge_pointname, rate
+      )
+    values (#{id,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, #{classname,jdbcType=VARCHAR}, 
+      #{teacher,jdbcType=VARCHAR}, #{pname,jdbcType=VARCHAR}, #{ptype,jdbcType=VARCHAR}, 
+      #{testNumber,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{questionScore,jdbcType=REAL}, 
+      #{hadScore,jdbcType=REAL}, #{testTimes,jdbcType=INTEGER}, #{testTime,jdbcType=INTEGER}, 
+      #{knowledgePointid,jdbcType=INTEGER}, #{knowledgePointname,jdbcType=VARCHAR}, #{rate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="edu.nwafu.paper.beans.Score">
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="stuid != null">
+        stuid,
+      </if>
+      <if test="classname != null">
+        classname,
+      </if>
+      <if test="teacher != null">
+        teacher,
+      </if>
+      <if test="pname != null">
+        pname,
+      </if>
+      <if test="ptype != null">
+        ptype,
+      </if>
+      <if test="testNumber != null">
+        test_number,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+      <if test="questionScore != null">
+        question_score,
+      </if>
+      <if test="hadScore != null">
+        had_score,
+      </if>
+      <if test="testTimes != null">
+        test_times,
+      </if>
+      <if test="testTime != null">
+        test_time,
+      </if>
+      <if test="knowledgePointid != null">
+        knowledge_pointid,
+      </if>
+      <if test="knowledgePointname != null">
+        knowledge_pointname,
+      </if>
+      <if test="rate != null">
+        rate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null">
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="classname != null">
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null">
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="pname != null">
+        #{pname,jdbcType=VARCHAR},
+      </if>
+      <if test="ptype != null">
+        #{ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="testNumber != null">
+        #{testNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+      <if test="questionScore != null">
+        #{questionScore,jdbcType=REAL},
+      </if>
+      <if test="hadScore != null">
+        #{hadScore,jdbcType=REAL},
+      </if>
+      <if test="testTimes != null">
+        #{testTimes,jdbcType=INTEGER},
+      </if>
+      <if test="testTime != null">
+        #{testTime,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointid != null">
+        #{knowledgePointid,jdbcType=INTEGER},
+      </if>
+      <if test="knowledgePointname != null">
+        #{knowledgePointname,jdbcType=VARCHAR},
+      </if>
+      <if test="rate != null">
+        #{rate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.nwafu.paper.beans.ScoreExample" resultType="java.lang.Integer">
+    select count(*) from score
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update score
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null">
+        stuid = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.classname != null">
+        classname = #{record.classname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teacher != null">
+        teacher = #{record.teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pname != null">
+        pname = #{record.pname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ptype != null">
+        ptype = #{record.ptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.testNumber != null">
+        test_number = #{record.testNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionId != null">
+        question_id = #{record.questionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.questionScore != null">
+        question_score = #{record.questionScore,jdbcType=REAL},
+      </if>
+      <if test="record.hadScore != null">
+        had_score = #{record.hadScore,jdbcType=REAL},
+      </if>
+      <if test="record.testTimes != null">
+        test_times = #{record.testTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.testTime != null">
+        test_time = #{record.testTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.knowledgePointid != null">
+        knowledge_pointid = #{record.knowledgePointid,jdbcType=INTEGER},
+      </if>
+      <if test="record.knowledgePointname != null">
+        knowledge_pointname = #{record.knowledgePointname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update score
+    set id = #{record.id,jdbcType=INTEGER},
+      stuid = #{record.stuid,jdbcType=INTEGER},
+      classname = #{record.classname,jdbcType=VARCHAR},
+      teacher = #{record.teacher,jdbcType=VARCHAR},
+      pname = #{record.pname,jdbcType=VARCHAR},
+      ptype = #{record.ptype,jdbcType=VARCHAR},
+      test_number = #{record.testNumber,jdbcType=INTEGER},
+      question_id = #{record.questionId,jdbcType=INTEGER},
+      question_score = #{record.questionScore,jdbcType=REAL},
+      had_score = #{record.hadScore,jdbcType=REAL},
+      test_times = #{record.testTimes,jdbcType=INTEGER},
+      test_time = #{record.testTime,jdbcType=INTEGER},
+      knowledge_pointid = #{record.knowledgePointid,jdbcType=INTEGER},
+      knowledge_pointname = #{record.knowledgePointname,jdbcType=VARCHAR},
+      rate = #{record.rate,jdbcType=DATE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.paper.mapper.TeacherMapper">
+  <resultMap id="BaseResultMap" type="edu.nwafu.paper.beans.Teacher">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="teacherid" jdbcType="INTEGER" property="teacherid" />
+    <result column="teacherpassword" jdbcType="VARCHAR" property="teacherpassword" />
+    <result column="teachername" jdbcType="VARCHAR" property="teachername" />
+    <result column="department" jdbcType="VARCHAR" property="department" />
+    <result column="major" jdbcType="VARCHAR" property="major" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, teacherid, teacherpassword, teachername, department, major
+  </sql>
+  <select id="selectByExample" parameterType="edu.nwafu.paper.beans.TeacherExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="edu.nwafu.paper.beans.TeacherExample">
+    delete from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="edu.nwafu.paper.beans.Teacher">
+    insert into teacher (id, teacherid, teacherpassword, 
+      teachername, department, major
+      )
+    values (#{id,jdbcType=INTEGER}, #{teacherid,jdbcType=INTEGER}, #{teacherpassword,jdbcType=VARCHAR}, 
+      #{teachername,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="edu.nwafu.paper.beans.Teacher">
+    insert into teacher
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
+      </if>
+      <if test="teacherpassword != null">
+        teacherpassword,
+      </if>
+      <if test="teachername != null">
+        teachername,
+      </if>
+      <if test="department != null">
+        department,
+      </if>
+      <if test="major != null">
+        major,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="teacherpassword != null">
+        #{teacherpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="teachername != null">
+        #{teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="major != null">
+        #{major,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="edu.nwafu.paper.beans.TeacherExample" resultType="java.lang.Integer">
+    select count(*) from teacher
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update teacher
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherid != null">
+        teacherid = #{record.teacherid,jdbcType=INTEGER},
+      </if>
+      <if test="record.teacherpassword != null">
+        teacherpassword = #{record.teacherpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachername != null">
+        teachername = #{record.teachername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.department != null">
+        department = #{record.department,jdbcType=VARCHAR},
+      </if>
+      <if test="record.major != null">
+        major = #{record.major,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update teacher
+    set id = #{record.id,jdbcType=INTEGER},
+      teacherid = #{record.teacherid,jdbcType=INTEGER},
+      teacherpassword = #{record.teacherpassword,jdbcType=VARCHAR},
+      teachername = #{record.teachername,jdbcType=VARCHAR},
+      department = #{record.department,jdbcType=VARCHAR},
+      major = #{record.major,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

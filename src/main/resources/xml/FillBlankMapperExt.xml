@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.paper.mapper.FillBlankMapper">
+  <select id="selectAll" resultMap="BaseResultMap">
+      select * from fill_blank
+  </select>
+    <select id="selectByChapter" resultMap="BaseResultMap">
+      select * from fill_blank
+      where course_id = #{chapter}
+  </select>
+    <select id="selectByPoint" resultMap="BaseResultMap">
+      select * from fill_blank
+      where point_id = #{point}
+  </select>
+    <update id="increaseUseCount">
+        UPDATE fill_blank SET usage_count = usage_count + 1 WHERE id = #{id}
+    </update>
+</mapper>

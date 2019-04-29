@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nwafu.paper.mapper.MultipleChoiceMapper">
+    <select id="selectAll" resultMap="BaseResultMap">
+     select * from multiple_choice
+    </select>
+    <select id="selectByChapter" resultMap="BaseResultMap">
+     select * from multiple_choice
+     where course_id = #{chapter}
+    </select>
+    <select id="selectByPoint" resultMap="BaseResultMap">
+     select * from multiple_choice
+     where point_id = #{point}
+    </select>
+    <update id="increaseUseCount">
+        UPDATE multiple_choice SET usage_count = usage_count + 1 WHERE id = #{id}
+    </update>
+</mapper>
